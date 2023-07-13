@@ -1,0 +1,7 @@
+
+*.vsidx
+*.lock
+ApiTemplate/.vs
+bin
+obj
+*.user
