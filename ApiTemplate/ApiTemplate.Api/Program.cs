@@ -1,3 +1,5 @@
+using ApiTemplate.IoC;
+using FluentValidation;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -71,9 +73,9 @@ services.AddAuthorization(opt =>
 //    opt.UseInMemoryDatabase("Context");
 //});
 
-//services.AddDependencyInjection();
-//services.AddAutoMapper(BaseConfig.Assemblies);
-//services.AddValidatorsFromAssemblies(BaseConfig.Assemblies);
+services.AddDependencyInjection();
+services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
