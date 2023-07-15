@@ -11,19 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Domain", "3. Domain", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infra", "4. Infra", "{18CC74DA-4CD4-48DE-8494-97DFB057ECB1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Data", "5. Data", "{64ADA494-D634-4156-AA02-0092489C12A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.Api", "ApiTemplate.Api\ApiTemplate.Api.csproj", "{4E19D3E4-A015-47FF-81D7-6BAF53D0C08D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Test", "6. Test", "{4DA70A2A-6600-44C1-84CD-E812FFF17950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.Domain", "ApiTemplate.Domain\ApiTemplate.Domain.csproj", "{490499A2-946F-47A2-A85A-6593008DCE34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTemplate.Api", "ApiTemplate.Api\ApiTemplate.Api.csproj", "{4E19D3E4-A015-47FF-81D7-6BAF53D0C08D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.Context", "ApiTemplate.Context\ApiTemplate.Context.csproj", "{20AF3332-9B9F-4A31-968C-38D76178305D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTemplate.Domain", "ApiTemplate.Domain\ApiTemplate.Domain.csproj", "{490499A2-946F-47A2-A85A-6593008DCE34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.IoC", "ApiTemplate.IoC\ApiTemplate.IoC.csproj", "{25379843-D039-44B1-A736-5ABFF86E90F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTemplate.Context", "ApiTemplate.Context\ApiTemplate.Context.csproj", "{20AF3332-9B9F-4A31-968C-38D76178305D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTemplate.IoC", "ApiTemplate.IoC\ApiTemplate.IoC.csproj", "{25379843-D039-44B1-A736-5ABFF86E90F9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTemplate.Application", "ApiTemplate.Application\ApiTemplate.Application.csproj", "{C3DF4926-2137-4CF4-BC6F-402904CBD9FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.Application", "ApiTemplate.Application\ApiTemplate.Application.csproj", "{C3DF4926-2137-4CF4-BC6F-402904CBD9FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

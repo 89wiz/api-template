@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiTemplate.Application\ApiTemplate.Application.csproj" />
     <ProjectReference Include="..\ApiTemplate.Context\ApiTemplate.Context.csproj" />
     <ProjectReference Include="..\ApiTemplate.Domain\ApiTemplate.Domain.csproj" />
   </ItemGroup>

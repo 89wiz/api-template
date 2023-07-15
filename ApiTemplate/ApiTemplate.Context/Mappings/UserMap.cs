@@ -10,5 +10,10 @@ internal class UserMap : IEntityTypeConfiguration<User>
     {
         builder.ToTable("User")
             .HasKey(x => x.Id);
+
+        builder.HasMany(x => x.Tasks)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId)
+            .HasPrincipalKey(x => x.Id);
     }
 }

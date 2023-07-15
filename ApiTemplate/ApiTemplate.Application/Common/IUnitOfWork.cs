@@ -1,8 +1,10 @@
-﻿namespace ApiTemplate.Domain.Interfaces
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace ApiTemplate.Application.Common
 {
     public interface IUnitOfWork
     {
-        IQueryable<T> Get<T>() where T : class;
+        DbSet<T> DbSet<T>() where T : class;
         Task BeginTransaction();
         Task Save();
         Task Rollback();

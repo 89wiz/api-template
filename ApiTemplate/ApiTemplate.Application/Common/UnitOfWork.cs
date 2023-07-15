@@ -1,21 +1,22 @@
-﻿using ApiTemplate.Domain.Interfaces;
+﻿using ApiTemplate.Infra.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace ApiTemplate.Infra.Data.Context;
+namespace ApiTemplate.Application.Common;
 
 public class UnitOfWork : IUnitOfWork, IDisposable
 {
-    private readonly Context _dbContext;
+    private readonly MyContext _dbContext;
 
     private IDbContextTransaction? _transaction;
     private bool _disposed;
 
-    public UnitOfWork(Context context)
+    public UnitOfWork(MyContext context)
     {
         _dbContext = context;
     }
 
-    public IQueryable<T> Get<T>() where T : class
+    public DbSet<T> DbSet<T>() where T : class
     {
         return _dbContext.Set<T>();
     }
@@ -36,9 +37,9 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         try
         {
             await Save();
-            await _transaction.CommitAsync();
+            await _transaction!.CommitAsync();
         }
-        catch(Exception)
+        catch (Exception)
         {
             await Rollback();
             throw;
@@ -47,7 +48,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
     public async Task Rollback()
     {
-        await _transaction.RollbackAsync();
+        await _transaction!.RollbackAsync();
     }
 
     public void Dispose()
@@ -58,10 +59,9 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        if (!this._disposed && disposing)
+        if (!_disposed && disposing)
             _dbContext.Dispose();
 
-        this._disposed = true;
+        _disposed = true;
     }
-
 }

@@ -1,8 +1,11 @@
+using ApiTemplate.Infra.Context;
 using ApiTemplate.IoC;
 using FluentValidation;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -68,10 +71,10 @@ services.AddAuthorization(opt =>
         .Build();
 });
 
-//services.AddDbContext<Context>(opt =>
-//{
-//    opt.UseInMemoryDatabase("Context");
-//});
+services.AddDbContext<MyContext>(opt =>
+{
+    opt.UseInMemoryDatabase("MyContext").ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+});
 
 services.AddDependencyInjection();
 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

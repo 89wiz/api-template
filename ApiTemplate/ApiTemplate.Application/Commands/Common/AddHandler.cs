@@ -1,9 +1,7 @@
-﻿using AnyOfTypes;
-using ApiTemplate.Domain.Interfaces;
-using ApiTemplate.Domain.Interfaces.Service.Common;
+﻿using ApiTemplate.Application.Common;
 using ApiTemplate.Domain.Validation;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+using OneOf;
 
 namespace ApiTemplate.Application.Commands.Common;
 
@@ -13,23 +11,21 @@ public class AddHandler<TRequest, TResponse, TEntity> : IAddHandler<TRequest, TR
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    private readonly IService<TEntity> _service;
     private readonly ValidationResult _validationResult;
 
-    public AddHandler(IUnitOfWork unitOfWork, IMapper mapper, IService<TEntity> service)
+    public AddHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
-        _service = service;
         _validationResult = new ValidationResult();
     }
 
-    public async Task<AnyOf<TResponse, ValidationResult>> Handle(TRequest request)
+    public async Task<OneOf<TResponse, ValidationResult>> Handle(TRequest request)
     {
         await _unitOfWork.BeginTransaction();
 
         var entity = _mapper.Map<TEntity>(request);
-        _validationResult.Add(await _service.Add(entity));
+        await _unitOfWork.DbSet<TEntity>().AddAsync(entity);
 
         if (!_validationResult.IsValid)
         {

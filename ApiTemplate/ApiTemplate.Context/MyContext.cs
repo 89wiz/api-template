@@ -1,11 +1,11 @@
 ﻿using ApiTemplate.Context.Mappings;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiTemplate.Infra.Data.Context;
+namespace ApiTemplate.Infra.Context;
 
-public class Context : DbContext
+public class MyContext : DbContext
 {
-    public Context(DbContextOptions<Context> options) : base(options) { }
+    public MyContext(DbContextOptions<MyContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
