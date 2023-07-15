@@ -9,7 +9,8 @@ public class UserProfile : Profile
 {
     public UserProfile()
     {
-        CreateMap<UserAddRequest, User>();
+        CreateMap<UserAddRequest, User>()
+            .ForMember(x => x.Password, opt => opt.MapFrom(x => BCrypt.Net.BCrypt.HashPassword(x.Password)));
         CreateMap<UserUpdateRequest, User>();
         CreateMap<User, UserResponse>();
     }
