@@ -1,9 +1,7 @@
-
 *.vsidx
 *.lock
-.vs
 bin
 obj
 *.user
 /ApiTemplate.Api/tasks.db
-/.vs/slnx.sqlite
+.vs

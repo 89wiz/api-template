@@ -15,3 +15,8 @@ public class MyContext : DbContext
         modelBuilder.ApplyConfiguration(new TaskMap());
     }
 }
+
+/* Commands:
+ * Add Migration: dotnet ef migrations add <migration_name> --project ApiTemplate.Context --startup-project ApiTemplate.Api
+ * Update Database: dotnet ef database update --project ApiTemplate.Context --startup-project ApiTemplate.Api -- --environment <environment>
+ */

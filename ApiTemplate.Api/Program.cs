@@ -73,7 +73,7 @@ services.AddAuthorization(opt =>
 
 services.AddDbContext<MyContext>(opt =>
 {
-    opt.UseInMemoryDatabase("MyContext").ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+    opt.UseSqlite("Data Source=tasks.db", opt => { opt.MigrationsAssembly("ApiTemplate.Context"); });
 });
 
 services.AddDependencyInjection();
