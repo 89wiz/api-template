@@ -7,13 +7,25 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Queries\" />
+	  <Compile Remove="Profiles\**" />
+	  <Compile Remove="Queries\**" />
+	  <Compile Remove="Requests\**" />
+	  <Compile Remove="Responses\**" />
+	  <EmbeddedResource Remove="Profiles\**" />
+	  <EmbeddedResource Remove="Queries\**" />
+	  <EmbeddedResource Remove="Requests\**" />
+	  <EmbeddedResource Remove="Responses\**" />
+	  <None Remove="Profiles\**" />
+	  <None Remove="Queries\**" />
+	  <None Remove="Requests\**" />
+	  <None Remove="Responses\**" />
 	</ItemGroup>
 	
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="12.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+		<PackageReference Include="MediatR" Version="12.2.0" />
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.3.0" />
 		<PackageReference Include="OneOf" Version="3.0.263" />
 		<PackageReference Include="Riok.Mapperly" Version="3.3.0" />
@@ -24,5 +36,9 @@
 	<ItemGroup>
 		<ProjectReference Include="..\ApiTemplate.Domain\ApiTemplate.Domain.csproj" />
 		<ProjectReference Include="..\ApiTemplate.Context\ApiTemplate.Context.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Common\Responses\" />
 	</ItemGroup>
 </Project>

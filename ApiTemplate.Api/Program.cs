@@ -1,3 +1,4 @@
+using ApiTemplate.Application.Common;
 using ApiTemplate.Infra.Context;
 using ApiTemplate.IoC;
 using FluentValidation;
@@ -5,7 +6,6 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -14,6 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 var configuration = builder.Configuration;
+
+services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Config.Assembly));
 
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(opt =>

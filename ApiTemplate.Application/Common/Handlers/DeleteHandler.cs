@@ -1,12 +1,11 @@
 ﻿using ApiTemplate.Application.Common;
-using ApiTemplate.Application.Requests.Common;
 using ApiTemplate.Application.Responses.Common;
 using ApiTemplate.Domain.Validation;
 using OneOf;
 
 namespace ApiTemplate.Application.Commands.Common;
 
-public class DeleteHandler<TEntity> : IDeleteHandler<TEntity>
+public class DeleteHandler<TEntity> : ICommandHandler<IDeleteCommand, DeleteResponse>
     where TEntity : class
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -18,7 +17,7 @@ public class DeleteHandler<TEntity> : IDeleteHandler<TEntity>
         _validationResult = new ValidationResult();
     }
 
-    public async Task<OneOf<DeleteResponse<GetByIdRequest>, ValidationResult>> Handle(GetByIdRequest request)
+    public async Task<OneOf<DeleteResponse, ValidationResult>> Handle(IDeleteCommand request, CancellationToken cancellationToken)
     {
         await _unitOfWork.BeginTransaction();
         var dbSet = _unitOfWork.DbSet<TEntity>();
@@ -30,6 +29,6 @@ public class DeleteHandler<TEntity> : IDeleteHandler<TEntity>
         dbSet.Remove(entity);
         if (_validationResult.IsValid) await _unitOfWork.Commit();
 
-        return new DeleteResponse<GetByIdRequest> { Id = request.Id, Value = request };
+        return new DeleteResponse { Id = request.Id };
     }
 }

@@ -6,5 +6,6 @@ public static class Mapping
     {
         UserMap.Map(app);
         LoginMap.Map(app);
+        TaskMap.Map(app);
     }
 }

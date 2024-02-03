@@ -1,8 +1,4 @@
-﻿using ApiTemplate.Application.Commands.Common;
-using ApiTemplate.Application.Common;
-using ApiTemplate.Application.Requests.Login;
-using ApiTemplate.Application.Responses.Login;
-using ApiTemplate.Domain.Entities;
+﻿using ApiTemplate.Application.Common;
 using ApiTemplate.Domain.Validation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -11,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace ApiTemplate.Application.Commands.Login
+namespace ApiTemplate.Application.User.Login
 {
     public class LoginHandler : ICommandHandler<LoginRequest, LoginResponse>
     {
@@ -26,9 +22,9 @@ namespace ApiTemplate.Application.Commands.Login
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<OneOf<LoginResponse, ValidationResult>> Handle(LoginRequest request)
+        public async Task<OneOf<LoginResponse, ValidationResult>> Handle(LoginRequest request, CancellationToken cancellationToken)
         {
-            var user = _unitOfWork.DbSet<User>().FirstOrDefault(x => x.Username == request.Username);
+            var user = _unitOfWork.DbSet<Domain.Entities.User>().FirstOrDefault(x => x.Username == request.Username);
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
                 return _validationResult.Add("Invalid Login", ValidationResult.ValidationErrorCode.Conflict);
@@ -55,13 +51,13 @@ namespace ApiTemplate.Application.Commands.Login
             return loginResponse;
         }
 
-        private static ClaimsIdentity GetClaims(User user)
+        private static ClaimsIdentity GetClaims(Domain.Entities.User user)
         {
             var claims = new List<Claim>
             {
-                //new Claim(ClaimTypes.SerialNumber, user.Id.ToString()),
-                //new Claim(ClaimTypes., user.Nome),
-                //new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Sid, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Email, user.Email),
             };
 
             return new ClaimsIdentity(claims);

@@ -1,6 +1,8 @@
-﻿namespace ApiTemplate.Application.Requests.Common;
+﻿using MediatR;
 
-public class GetByIdRequest
+namespace ApiTemplate.Application.Requests.Common;
+
+public class GetByIdRequest<TResponse> : IRequest<TResponse>
 {
     public Guid Id { get; init; }
 

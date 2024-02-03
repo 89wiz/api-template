@@ -1,6 +1,7 @@
 ﻿using ApiTemplate.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using AsyncTask = System.Threading.Tasks.Task;
 
 namespace ApiTemplate.Application.Common;
 
@@ -21,23 +22,23 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         return _dbContext.Set<T>();
     }
 
-    public async Task BeginTransaction()
+    public async AsyncTask BeginTransaction(CancellationToken cancellationToken = default)
     {
-        _transaction = await _dbContext.Database.BeginTransactionAsync();
+        _transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
         _disposed = false;
     }
 
-    public async Task Save()
+    public async AsyncTask Save(CancellationToken cancellationToken = default)
     {
-        await _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task Commit()
+    public async AsyncTask Commit(CancellationToken cancellationToken = default)
     {
         try
         {
-            await Save();
-            await _transaction!.CommitAsync();
+            await Save(cancellationToken);
+            await _transaction!.CommitAsync(cancellationToken);
         }
         catch (Exception)
         {
@@ -46,9 +47,9 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         }
     }
 
-    public async Task Rollback()
+    public async AsyncTask Rollback(CancellationToken cancellationToken = default)
     {
-        await _transaction!.RollbackAsync();
+        await _transaction!.RollbackAsync(cancellationToken);
     }
 
     public void Dispose()

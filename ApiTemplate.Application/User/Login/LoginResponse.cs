@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.Application.Responses.Login;
+﻿namespace ApiTemplate.Application.User.Login;
 
 public class LoginResponse
 {
