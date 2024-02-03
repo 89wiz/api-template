@@ -13,17 +13,20 @@ public static partial class UserMap
         app.MapGet("user/{id}",
             (IMediator mediator, Guid id)
                 => mediator.Send(new GetByIdRequest<UserResponse>(id)))
-            .ProduceResults<UserResponse>();
+            .ProduceResults<UserResponse>()
+            .WithTags("User");
 
         app.MapPost("user",
             (IMediator mediator, UserAddRequest request)
                 => mediator.Send(request).AsResult())
             .ProduceResults<UserResponse>()
+            .WithTags("User")
             .AllowAnonymous();
 
         app.MapPut("user",
             (IMediator mediator, UserUpdateRequest request)
                 => mediator.Send(request).AsResult())
-            .ProduceResults<UserResponse>();
+            .ProduceResults<UserResponse>()
+            .WithTags("User");
     }
 }

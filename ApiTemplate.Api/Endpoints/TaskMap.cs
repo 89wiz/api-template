@@ -13,11 +13,13 @@ public static partial class TaskMap
         app.MapPost("user/task",
             (IMediator mediator, TaskAddRequest request, ClaimsPrincipal user)
                 => mediator.Send(request.WithUser(user)).AsResult())
-            .ProduceResults<TaskResponse>();
-        
+            .ProduceResults<TaskResponse>()
+            .WithTags("User", "Task");
+
         app.MapPut("user/task/{id}",
             (IMediator mediator, Guid id, ClaimsPrincipal user)
                 => mediator.Send(new TaskDoneRequest().WithId(id).WithUser(user)).AsResult())
-            .ProduceResults<TaskResponse>();
+            .ProduceResults<TaskResponse>()
+            .WithTags("User", "Task");
     }
 }

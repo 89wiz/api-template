@@ -12,6 +12,7 @@ public static partial class LoginMap
             (IMediator mediator, LoginRequest request)
                 => mediator.Send(request).AsResult())
             .ProduceResults<UserResponse>()
+            .WithTags("Login")
             .AllowAnonymous();
     }
 }
