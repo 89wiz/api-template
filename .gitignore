@@ -5,3 +5,5 @@ obj
 *.user
 /ApiTemplate.Api/tasks.db
 .vs
+/ApiTemplate.Api/tasks.db-shm
+*.db-wal
